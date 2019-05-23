@@ -1,0 +1,16 @@
+0. Define a class for a three-dimensional space. This should be able to:
+    0. Determine where points should go on the screen based on their
+       three-dimensional coordinates.
+    1. Define a three-dimensional graph (e.g., x, y, and z axes) which can
+       be arbitrarily rotated or zoomed.
+    2. Draw a line from one point to another.
+
+1. Define a class for three-dimensional points. This should be able to:
+    0. Tell the space class where it is.
+    1. Move linearly along x, y, and z axes.
+    2. Rotate itself about an arbitrary line.
+
+2. Define a class for three-dimensional triangles. This should:
+    0. Be made of points as described in step 1, and thereby inherit the
+       abilities of those points.
+    1. Be able to tell the space class to draw its edges.
