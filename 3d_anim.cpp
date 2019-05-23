@@ -40,12 +40,13 @@ int main() {
     bool window_open = true;
     SDL_Event event;
 
+    // these variables offset the two sets of axes
     int ashift = 306;
     int bshift = 294;
 
-    Space s0;
+    Space s0; // the Space class does point manipulation and abstracts calculation for us
     Space s1;
-    Axes a;
+    Axes a; // the Axes class defines a set of lines based on the Space class and the Line3d type
     Axes b;
     s0.set_depth_to(130);
     s0.set_screen_center(300, 300);
@@ -57,11 +58,14 @@ int main() {
     b.init(100, bshift, 300);
 
     while (window_open) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        std::this_thread::sleep_for(std::chrono::milliseconds(50)); // delay framerate
         SDL_SetRenderDrawColor(renderer, BLACK, 0);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, CYAN, 255);
 
+        // because the Space and Axes classes are graphics-API-agnostic, we have
+        // to do the grunt work of translating their calculations into SDL function
+        // calls ourselves
         SDL_RenderDrawLine(
             renderer,
             a.space.convert_to_2d(a.x_axis.endpoint_0).x,
@@ -110,6 +114,7 @@ int main() {
 
         SDL_RenderPresent(renderer);
 
+        // this giant code wall performs 1-degree rotations on our points along the x and z axes
         a.x_axis.endpoint_0 = a.space.x_rotation(a.x_axis.endpoint_0, a.space.point_at(ashift, 300, 0), 1);
         a.x_axis.endpoint_1 = a.space.x_rotation(a.x_axis.endpoint_1, a.space.point_at(ashift, 300, 0), 1);
         a.y_axis.endpoint_0 = a.space.x_rotation(a.y_axis.endpoint_0, a.space.point_at(ashift, 300, 0), 1);
@@ -143,11 +148,9 @@ int main() {
             case SDL_QUIT:
                 window_open = false;
                 break;
-            /* other cases go here */
         }
     }
 
-    /* if any heap memory was allocated, free it here */
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(main_window);
     SDL_Quit();
