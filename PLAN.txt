@@ -1,16 +1,22 @@
 0. Define a class for a three-dimensional space. This should be able to:
     0. Determine where points should go on the screen based on their
-       three-dimensional coordinates.
+       three-dimensional coordinates. (completed)
     1. Define a three-dimensional graph (e.g., x, y, and z axes) which can
-       be arbitrarily rotated or zoomed.
-    2. Draw a line from one point to another.
+       be arbitrarily rotated or zoomed. (completed)
+    2. Draw a line from one point to another. (completed)
+(Step 0 is completed.)
 
 1. Define a class for three-dimensional points. This should be able to:
-    0. Tell the space class where it is.
-    1. Move linearly along x, y, and z axes.
-    2. Rotate itself about an arbitrary line.
+    0. Tell the space class where it is. (completed)
+    1. Move linearly along x, y, and z axes. (completed)
+    2. Rotate itself about an arbitrary line. (not applicable; Space
+    class does the rotating)
+(Step 1 is effectively completed, though three-dimensional points wound up
+being a typedef struct rather than a class.)
 
 2. Define a class for three-dimensional triangles. This should:
     0. Be made of points as described in step 1, and thereby inherit the
        abilities of those points.
     1. Be able to tell the space class to draw its edges.
+(Step 2 is not completed but would be so trivial to implement that it doesn't
+really matter. I just haven't gotten to doing it.)
