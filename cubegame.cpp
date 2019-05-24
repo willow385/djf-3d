@@ -1,8 +1,5 @@
-/* This contains all the boilerplate needed to
-make a simple SDL2 program in C++. */
-
 // Compile with the following:
-// g++ <FILENAME>.cpp `pkg-config --cflags --libs sdl2`
+// g++ cubegame.cpp `pkg-config --cflags --libs sdl2`
 
 #include <SDL2/SDL.h>
 #include <iostream>
@@ -12,6 +9,8 @@ make a simple SDL2 program in C++. */
 #define MAGENTA 255, 0, 5
 #define BLACK 0, 0, 0
 
+// Though I'll probably get around to making a header file for all Platonic shapes later,
+// I'm just defining a quick Cube class here for this standalone program.
 class Cube {
     public:
         Space s;
@@ -28,19 +27,23 @@ class Cube {
             edge = e;
         }
 
+        // I chose this way to write the parameters for my own benefit; it's a bit ugly but more
+        // readable for me.
         void set_vertices() {
-            vertices[0] = s.point_at(x_pos,        y_pos,        z_pos);
-            vertices[1] = s.point_at(x_pos + edge, y_pos,        z_pos);
+            vertices[0] = s.point_at(x_pos,        y_pos,        z_pos       );
+            vertices[1] = s.point_at(x_pos + edge, y_pos,        z_pos       );
             vertices[2] = s.point_at(x_pos + edge, y_pos,        z_pos + edge);
             vertices[3] = s.point_at(x_pos,        y_pos,        z_pos + edge);
 
-            vertices[4] = s.point_at(x_pos,        y_pos + edge, z_pos);
-            vertices[5] = s.point_at(x_pos + edge, y_pos + edge, z_pos);
+            vertices[4] = s.point_at(x_pos,        y_pos + edge, z_pos       );
+            vertices[5] = s.point_at(x_pos + edge, y_pos + edge, z_pos       );
             vertices[6] = s.point_at(x_pos + edge, y_pos + edge, z_pos + edge);
             vertices[7] = s.point_at(x_pos,        y_pos + edge, z_pos + edge);
         }
 
+        // big wall of code to draw the kyoob
         void draw_cube(SDL_Renderer *r) {
+            // draw the top face
             for (int i = 0; i < 3; ++i) {
                 SDL_RenderDrawLine(
                     r,
@@ -51,14 +54,7 @@ class Cube {
                 );
             }
 
-            SDL_RenderDrawLine(
-                r,
-                s.convert_to_2d(vertices[0]).x,
-                s.convert_to_2d(vertices[0]).y,
-                s.convert_to_2d(vertices[3]).x,
-                s.convert_to_2d(vertices[3]).y
-            );
-
+            // draw the bottom face
             for (int i = 4; i < 7; ++i) {
                 SDL_RenderDrawLine(
                     r,
@@ -68,6 +64,15 @@ class Cube {
                     s.convert_to_2d(vertices[i+1]).y
                 );
             }
+
+            // draw the lines connecting the two faces
+            SDL_RenderDrawLine(
+                r,
+                s.convert_to_2d(vertices[0]).x,
+                s.convert_to_2d(vertices[0]).y,
+                s.convert_to_2d(vertices[3]).x,
+                s.convert_to_2d(vertices[3]).y
+            );
 
             SDL_RenderDrawLine(
                 r,
@@ -151,6 +156,7 @@ int main() {
     space.set_depth_to(300);
     space.set_screen_center(300, 300);
 
+    // two cubes fro anaglyphic effect
     Cube cyan;
     Cube magenta;
     cyan.s = space;
