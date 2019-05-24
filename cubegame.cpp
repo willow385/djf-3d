@@ -163,10 +163,10 @@ int main() {
     magenta.s = space;
 
     magenta.init(
-        200,
-        196,
-        200,
-        30
+        200, // length of edges
+        196, // x-position
+        200, // y-position
+        30   // z-position
     );
     cyan.init(
         200,
