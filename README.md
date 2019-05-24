@@ -1,5 +1,5 @@
 # djf-3d
-A basic 3d graphics engine in C++
+A basic 3d graphics engine in C++ (use `sudo apt-get install libsdl2-dev` to install SDL on Ubuntu or other Debian)
 
 NOTE: the `.cpp` files aren't components of a greater whole; they are standalone programs written to demonstrate djf-3d.
 The engine itself is made out of `.hpp` and `.h` files.
