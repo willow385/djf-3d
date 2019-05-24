@@ -8,7 +8,7 @@
 #include "axes.hpp"
 
 #define CYAN 0, 150, 255
-#define MAGENTA 255, 0, 100
+#define MAGENTA 255, 0, 5
 #define BLACK 0, 0, 0
 
 int main() {
