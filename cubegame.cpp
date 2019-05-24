@@ -153,7 +153,7 @@ int main() {
     bool window_open = true;
     SDL_Event event;
     Space space;
-    space.set_depth_to(300);
+    space.set_depth_to(170);
     space.set_screen_center(300, 300);
 
     // two cubes fro anaglyphic effect
