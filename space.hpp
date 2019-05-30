@@ -61,8 +61,10 @@ class Space {
         // it into a 2d coordinate according to the laws of perspective.
         CoordPair convert_to_2d(CoordTriple q) {
             CoordPair ret;
-            ret.x = (q.x + (screen_x * (q.z / depth))) / ((q.z / depth) + 1);
-            ret.y = (q.y + (screen_y * (q.z / depth))) / ((q.z / depth) + 1);
+            if (q.z > (-1 * depth)) {
+                ret.x = (q.x + (screen_x * (q.z / depth))) / ((q.z / depth) + 1);
+                ret.y = (q.y + (screen_y * (q.z / depth))) / ((q.z / depth) + 1);
+            }
             return ret;
         }
 
