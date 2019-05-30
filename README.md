@@ -10,3 +10,5 @@ install SDL on Ubuntu or other Debian)
 
 3d rendering is where I find object-oriented programming to be most useful. I have therefore written much of the engine
 in an object-oriented style. This is why I used C++ instead of pure C to write the engine.
+
+As of 29 May 2019, the coolest of these is in the subdirectory `world`. Do check it out.
