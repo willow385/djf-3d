@@ -280,7 +280,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].x_trans(1);
-                                xpos -= (1/1024);
+                                xpos -= 0.001;
                             }
                         }
                         break;
@@ -288,7 +288,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].x_trans(-1);
-                                xpos += (1/1024);
+                                xpos += 0.001;
                             }
                         }
                         break;
@@ -296,7 +296,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].z_trans(-1);
-                                zpos += (1/1024);
+                                zpos += 0.001;
                             }
                         }
                         break;
@@ -304,7 +304,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].z_trans(1);
-                                zpos -= (1/1024);
+                                zpos -= 0.001;
                             }
                         }
                         break;
@@ -312,7 +312,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_trans(-1);
-                                ypos -= (1/1024);
+                                ypos -= 0.001;
                             }
                         }
                         break;
@@ -320,7 +320,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_trans(1);
-                                ypos += (1/1024);
+                                ypos += 0.001;
                             }
                         }
                         break;
@@ -328,7 +328,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_rot_about(observer, -1);
-                                angle -= (1000/1024);
+                                angle -= 1;
                             }
                         }
                         break;
@@ -336,12 +336,12 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_rot_about(observer, 1);
-                                angle += (1000/1024);
+                                angle += 1;
                             }
                         }
                         break;
                 }
-                break;
+            break;
         }
     }
 
