@@ -10,6 +10,8 @@
 #define GREEN 0, 255, 70
 #define BLACK 0, 0, 0
 
+// this handy function was copied almost verbatim from StackOverflow
+// https://stackoverflow.com/a/5794022/10942736
 std::string convert_to_str(float number){
     std::ostringstream buff;
     buff << number;
@@ -17,6 +19,11 @@ std::string convert_to_str(float number){
 }
 
 int main() {
+    /* One criticism I have of SDL is that it requires a fair amount
+    of boilerplate code. I understand why this code is necessary and
+    appreciate the control it gives me, but the only thing I really want
+    to do diffferent from one SDL program to the next is the window
+    title and maybe the window size. */
     SDL_Renderer *renderer;
     SDL_Window *main_window;
     SDL_Init(SDL_INIT_VIDEO);
@@ -45,14 +52,21 @@ int main() {
     bool window_open = true;
     SDL_Event event;
 
+    // We must have an instance of the Space class in which
+    // our pretty shapes reside.
     Space space;
     space.set_depth_to(300);
     space.set_screen_center(300, 300);
 
+    // I'm making a grid of 1024 triangles which will be the ground.
     Triangle ground[0x20][0x20];
     for (int y = 0; y < 0x20; ++y) {
         for (int x = 0; x < 0x20; ++x) {
+            // Each of the triangles will be in the same space.
             ground[y][x].set_space(space);
+            
+            // The triangles will be offset so that they form an isometric
+            // grid.
             if (y % 2 == 0) {
                 ground[y][x].set_angle0(
                     x * 15,
@@ -89,14 +103,17 @@ int main() {
         }
     }
 
-    CoordTriple observer; // where we see from
+    CoordTriple observer; // the point from which we see
     observer.x = 300;
     observer.y = 200;
     observer.z = -(0x20 * 7.5);
+    
+    // The next four values are displayed on the screen.
     float xpos = observer.x;
     float ypos = observer.y;
     float zpos = observer.z;
     float angle = 0;
+ 
     while (window_open) {
         if (angle >= 360000) {
             angle = 0;
@@ -163,8 +180,6 @@ int main() {
             GREEN,
             255
         );
-
-
         render_string(
             renderer,
             1,
@@ -184,8 +199,6 @@ int main() {
             GREEN,
             255
         );
-
-
         render_string(
             renderer,
             1,
@@ -205,7 +218,6 @@ int main() {
             GREEN,
             255
         );
-
         render_string(
             renderer,
             1,
@@ -225,7 +237,6 @@ int main() {
             GREEN,
             255
         );
-
         render_string(
             renderer,
             1,
@@ -256,8 +267,6 @@ int main() {
 
         SDL_RenderPresent(renderer);
 
-        /* state modification goes here */
-
         SDL_PollEvent(&event);
         switch (event.type) {
             case SDL_QUIT:
@@ -271,7 +280,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].x_trans(1);
-                                xpos -= 0.001;
+                                xpos -= (1/1024);
                             }
                         }
                         break;
@@ -279,7 +288,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].x_trans(-1);
-                                xpos += 0.001;
+                                xpos += (1/1024);
                             }
                         }
                         break;
@@ -287,7 +296,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].z_trans(-1);
-                                zpos += 0.001;
+                                zpos += (1/1024);
                             }
                         }
                         break;
@@ -295,7 +304,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].z_trans(1);
-                                zpos -= 0.001;
+                                zpos -= (1/1024);
                             }
                         }
                         break;
@@ -303,7 +312,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_trans(-1);
-                                ypos -= 0.001;
+                                ypos -= (1/1024);
                             }
                         }
                         break;
@@ -311,7 +320,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_trans(1);
-                                ypos += 0.001;
+                                ypos += (1/1024);
                             }
                         }
                         break;
@@ -319,7 +328,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_rot_about(observer, -1);
-                                angle -= 1;
+                                angle -= (1000/1024);
                             }
                         }
                         break;
@@ -327,7 +336,7 @@ int main() {
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_rot_about(observer, 1);
-                                angle += 1;
+                                angle += (1000/1024);
                             }
                         }
                         break;
@@ -336,7 +345,6 @@ int main() {
         }
     }
 
-    /* if any heap memory was allocated, free it here */
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(main_window);
     SDL_Quit();
