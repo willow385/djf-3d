@@ -277,50 +277,50 @@ int main() {
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_a:
+                        xpos--;
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].x_trans(1);
-                                xpos -= 0.001;
                             }
                         }
                         break;
                     case SDLK_d:
+                        xpos++;
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].x_trans(-1);
-                                xpos += 0.001;
                             }
                         }
                         break;
                     case SDLK_w:
+                        zpos++;
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].z_trans(-1);
-                                zpos += 0.001;
                             }
                         }
                         break;
                     case SDLK_s:
+                        zpos--;
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].z_trans(1);
-                                zpos -= 0.001;
                             }
                         }
                         break;
                     case SDLK_UP:
+                        ypos--;
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_trans(-1);
-                                ypos -= 0.001;
                             }
                         }
                         break;
                     case SDLK_DOWN:
+                        ypos++;
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_trans(1);
-                                ypos += 0.001;
                             }
                         }
                         break;
