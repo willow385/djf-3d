@@ -64,7 +64,7 @@ int main() {
         for (int x = 0; x < 0x20; ++x) {
             // Each of the triangles will be in the same space.
             ground[y][x].set_space(space);
-            
+
             // The triangles will be offset so that they form an isometric
             // grid.
             if (y % 2 == 0) {
@@ -107,19 +107,19 @@ int main() {
     observer.x = 300;
     observer.y = 200;
     observer.z = -(0x20 * 7.5);
-    
+
     // The next four values are displayed on the screen.
     float xpos = observer.x;
     float ypos = observer.y;
     float zpos = observer.z;
     float angle = 0;
- 
+
     while (window_open) {
-        if (angle >= 360000) {
+        if (angle >= 360) {
             angle = 0;
         }
         if (angle < 0) {
-            angle = 359999;
+            angle = 359;
         }
 
         SDL_SetRenderDrawColor(renderer, BLACK, 0);
@@ -246,7 +246,7 @@ int main() {
             GREEN,
             255
         );
-        std::string angbuf = convert_to_str(angle / 1000);
+        std::string angbuf = convert_to_str(angle) + " DEGREES";
         render_string(
             renderer,
             37,
@@ -325,18 +325,18 @@ int main() {
                         }
                         break;
                     case SDLK_q:
+                        angle--;
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_rot_about(observer, -1);
-                                angle -= 1;
                             }
                         }
                         break;
                     case SDLK_e:
+                        angle++;
                         for (int y = 0; y < 0x20; ++y) {
                             for (int x = 0; x < 0x20; ++x) {
                                 ground[y][x].y_rot_about(observer, 1);
-                                angle += 1;
                             }
                         }
                         break;
