@@ -1,6 +1,6 @@
 # This is a conceptual map of how the files fit in to eachother.
 
-3d_types.hpp       math.h          SDL2.h  (various I/O libraries)
+3d_types.hpp       math.h          SDL.h   (various I/O libraries)
      |               |               |              |    |
      +--------+------+               V              |    |
               |                    +-+-+            |    |
