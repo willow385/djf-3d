@@ -180,76 +180,40 @@ int main() {
             GREEN,
             255
         );
+        std::string xbuf = "X-POS " + convert_to_str(xpos);
         render_string(
             renderer,
             1,
-            76,
-            "X-POS ",
-            6,
-            GREEN,
-            255
-        );
-        std::string xbuf = convert_to_str(xpos);
-        render_string(
-            renderer,
-            37,
             76,
             xbuf.c_str(),
             strlen(xbuf.c_str()),
             GREEN,
             255
         );
+        std::string ybuf = "Y-POS " + convert_to_str(ypos);
         render_string(
             renderer,
             1,
-            86,
-            "Y-POS ",
-            6,
-            GREEN,
-            255
-        );
-        std::string ybuf = convert_to_str(ypos);
-        render_string(
-            renderer,
-            37,
             86,
             ybuf.c_str(),
             strlen(ybuf.c_str()),
             GREEN,
             255
         );
+        std::string zbuf = "Z-POS " + convert_to_str(zpos);
         render_string(
             renderer,
             1,
-            96,
-            "Z-POS ",
-            6,
-            GREEN,
-            255
-        );
-        std::string zbuf = convert_to_str(zpos);
-        render_string(
-            renderer,
-            37,
             96,
             zbuf.c_str(),
             strlen(zbuf.c_str()),
             GREEN,
             255
         );
+        std::string angbuf = "THETA " + convert_to_str(angle) + " DEGREES";
         render_string(
             renderer,
             1,
-            106,
-            "THETA ",
-            6,
-            GREEN,
-            255
-        );
-        std::string angbuf = convert_to_str(angle) + " DEGREES";
-        render_string(
-            renderer,
-            37,
             106,
             angbuf.c_str(),
             strlen(angbuf.c_str()),
