@@ -1,0 +1,150 @@
+#ifndef SDL2_SDL_H
+#define SDL2_SDL_H
+#include <SDL2/SDL.h>
+#endif
+
+#ifndef TRIANGLE_HPP
+#define TRIANGLE_HPP
+#include "triangle.hpp"
+#endif // TRIANGLE_HPP
+
+#include <stdexcept>
+
+class Plane {
+private:
+    Space s;
+    Triangle ground[0x20][0x20];
+    float height; // height of each triangle
+    float y_val; // y-coordiante of the plane
+
+public:
+    Space get_space() {
+        Space ret = s;
+        return ret;
+    }
+
+    void set_space(Space _s) {
+        s = _s;
+    }
+
+    Triangle get_triangle_index(int index_a, int index_b) {
+        if (index_a > 0x20 || index_b > 0x20) {
+            throw std::invalid_argument("Error - attempted to access illegal array index");
+        }
+
+        Triangle ret = ground[index_a][index_b];
+        return ret;
+    }
+
+    void init_triangles() {
+        for (int y = 0; y < 0x20; ++y) {
+            for (int x = 0; x < 0x20; ++x) {
+                // Each of the triangles will be in the same space.
+                ground[y][x].set_space(s);
+
+                // The triangles will be offset so that they form an isometric
+                // grid.
+                if (y % 2 == 0) {
+                    ground[y][x].set_angle0(
+                        x * height,
+                        y_val,
+                        (y * (height / 2)) + 0
+                    );
+                    ground[y][x].set_angle1(
+                        (x * height) - (height / 2),
+                        y_val,
+                        (y * (height / 2)) + (height / 2)
+                    );
+                    ground[y][x].set_angle2(
+                        (x * height) + (height / 2),
+                        y_val,
+                        (y * (height / 2)) + (height / 2)
+                    );
+                } else {
+                    ground[y][x].set_angle0(
+                        (x * height) + (height / 2),
+                        y_val,
+                        (y * (height / 2)) + 0
+                    );
+                    ground[y][x].set_angle1(
+                        x * height,
+                        y_val,
+                        (y * (height / 2)) + (height / 2)
+                    );
+                    ground[y][x].set_angle2(
+                        (x * height) + height,
+                        y_val,
+                        (y * (height / 2)) + (height / 2)
+                    );
+                }
+            }
+        }
+    }
+
+    void set_y_val(float val) {
+        y_val = val;
+    }
+
+    float get_y_val() {
+        float ret = y_val;
+        return ret;
+    }
+
+    void set_height(float val) {
+        height = val;
+    }
+
+    float get_height() {
+        float ret = height;
+        return ret;
+    }
+
+    int draw_plane(SDL_Renderer *r, float bound) {
+        int ret = 0;
+        for (int y = 0; y < 0x20; ++y) {
+            for (int x = 0; x < 0x20; ++x) {
+                ret += ground[y][x].draw_self(r, 600);
+            }
+        }
+        return ret;
+    }
+
+    void x_trans_plane(float amount) {
+        for (int y = 0; y < 0x20; ++y) {
+            for (int x = 0; x < 0x20; ++x) {
+                ground[y][x].x_trans(amount);
+            }
+        }
+    }
+
+    void y_trans_plane(float amount) {
+        for (int y = 0; y < 0x20; ++y) {
+            for (int x = 0; x < 0x20; ++x) {
+                ground[y][x].y_trans(amount);
+            }
+        }
+    }
+
+    void z_trans_plane(float amount) {
+        for (int y = 0; y < 0x20; ++y) {
+            for (int x = 0; x < 0x20; ++x) {
+                ground[y][x].z_trans(amount);
+            }
+        }
+    }
+
+    void rotate_plane(float degrees) {
+        for (int y = 0; y < 0x20; ++y) {
+            for (int x = 0; x < 0x20; ++x) {
+                ground[y][x].y_rot_about(
+                    s.point_at(
+                        s.get_screen_center().x,
+                        (s.get_screen_center().y * 2) - y_val,
+                        -(0x20 * (height / 2))
+                    ),
+                    degrees
+                );
+            }
+        }
+    }
+};
