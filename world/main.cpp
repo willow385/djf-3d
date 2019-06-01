@@ -58,12 +58,35 @@ int main() {
     space.set_depth_to(300);
     space.set_screen_center(300, 300);
 
-    // I will now create an instance of the Plane class from "plane.hpp".
-    Plane plane;
-    plane.set_space(space);
-    plane.set_height(15);
-    plane.set_y_val(500);
-    plane.init_triangles();
+    // I will now create some instances of the Plane class from "plane.hpp".
+    Plane plane0;
+    plane0.set_space(space);
+    plane0.set_height(15);
+    plane0.set_y_val(500);
+    plane0.init_triangles();
+
+    Plane plane1;
+    plane1.set_space(space);
+    plane1.set_height(15);
+    plane1.set_y_val(500);
+    plane1.init_triangles();
+
+    Plane plane2;
+    plane2.set_space(space);
+    plane2.set_height(15);
+    plane2.set_y_val(500);
+    plane2.init_triangles();
+
+    Plane plane3;
+    plane3.set_space(space);
+    plane3.set_height(15);
+    plane3.set_y_val(500);
+    plane3.init_triangles();
+
+    plane1.x_trans_plane(15.0 * 0x20);
+    plane2.z_trans_plane( 7.5 * 0x20);
+    plane3.x_trans_plane(15.0 * 0x20);
+    plane3.z_trans_plane( 7.5 * 0x20);
 
     // The next four values are displayed on the screen.
     float xpos = 300;
@@ -180,53 +203,84 @@ int main() {
 
         SDL_SetRenderDrawColor(renderer, GREEN, 255);
 
-        plane.draw_plane(renderer, 600);
+        plane0.draw_plane(renderer, 600);
+        plane1.draw_plane(renderer, 600);
+        plane2.draw_plane(renderer, 600);
+        plane3.draw_plane(renderer, 600);
 
         SDL_RenderPresent(renderer);
 
-        SDL_PollEvent(&event);
-        switch (event.type) {
-            case SDL_QUIT:
-                window_open = false;
-                break;
-            case SDL_KEYUP:
-                break;
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
-                    case SDLK_a:
-                        xpos--;
-                        plane.x_trans_plane(1);
-                        break;
-                    case SDLK_d:
-                        xpos++;
-                        plane.x_trans_plane(-1);
-                        break;
-                    case SDLK_w:
-                        zpos++;
-                        plane.z_trans_plane(-1);
-                        break;
-                    case SDLK_s:
-                        zpos--;
-                        plane.z_trans_plane(1);
-                        break;
-                    case SDLK_UP:
-                        ypos--;
-                        plane.y_trans_plane(-1);
-                        break;
-                    case SDLK_DOWN:
-                        ypos++;
-                        plane.y_trans_plane(1);
-                        break;
-                    case SDLK_q:
-                        angle--;
-                        plane.rotate_plane(-1);
-                        break;
-                    case SDLK_e:
-                        angle++;
-                        plane.rotate_plane(1);
-                        break;
-                }
-            break;
+        while (SDL_PollEvent(&event)) { // by putting this in a while loop, we eliminate lag
+            switch (event.type) {
+                case SDL_QUIT:
+                    window_open = false;
+                    break;
+                case SDL_KEYUP:
+                    break;
+                case SDL_KEYDOWN:
+                    switch (event.key.keysym.sym) {
+                        case SDLK_a:
+                            xpos--;
+                            plane0.x_trans_plane(1);
+                            plane1.x_trans_plane(1);
+                            plane2.x_trans_plane(1);
+                            plane3.x_trans_plane(1);
+                            break;
+                        case SDLK_d:
+                            xpos++;
+                            plane0.x_trans_plane(-1);
+                            plane1.x_trans_plane(-1);
+                            plane2.x_trans_plane(-1);
+                            plane3.x_trans_plane(-1);
+                            break;
+                        case SDLK_w:
+                            zpos++;
+                            plane0.z_trans_plane(-1);
+                            plane1.z_trans_plane(-1);
+                            plane2.z_trans_plane(-1);
+                            plane3.z_trans_plane(-1);
+                            break;
+                        case SDLK_s:
+                            zpos--;
+                            plane0.z_trans_plane(1);
+                            plane1.z_trans_plane(1);
+                            plane2.z_trans_plane(1);
+                            plane3.z_trans_plane(1);
+                            break;
+                        case SDLK_UP:
+                            ypos--;
+                            plane0.y_trans_plane(-1);
+                            plane1.y_trans_plane(-1);
+                            plane2.y_trans_plane(-1);
+                            plane3.y_trans_plane(-1);
+                            break;
+                        case SDLK_DOWN:
+                            ypos++;
+                            plane0.y_trans_plane(1);
+                            plane1.y_trans_plane(1);
+                            plane2.y_trans_plane(1);
+                            plane3.y_trans_plane(1);
+                            break;
+                        case SDLK_q:
+                            angle--;
+                            plane0.rotate_plane(-1);
+                            plane1.rotate_plane(-1);
+                            plane2.rotate_plane(-1);
+                            plane3.rotate_plane(-1);
+                            break;
+                        case SDLK_e:
+                            angle++;
+                            plane0.rotate_plane(1);
+                            plane1.rotate_plane(1);
+                            plane2.rotate_plane(1);
+                            plane3.rotate_plane(1);
+                            break;
+                    }
+                    break; // end of keypress case
+
+                default:
+                    break;
+            }
         }
     }
 
