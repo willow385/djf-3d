@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "triangle.hpp"
+#include "plane.hpp"
 #include "djf-SDL-text.h"
 
 #define GREEN 0, 255, 70
@@ -58,60 +58,17 @@ int main() {
     space.set_depth_to(300);
     space.set_screen_center(300, 300);
 
-    // I'm making a grid of 1024 triangles which will be the ground.
-    Triangle ground[0x20][0x20];
-    for (int y = 0; y < 0x20; ++y) {
-        for (int x = 0; x < 0x20; ++x) {
-            // Each of the triangles will be in the same space.
-            ground[y][x].set_space(space);
-
-            // The triangles will be offset so that they form an isometric
-            // grid.
-            if (y % 2 == 0) {
-                ground[y][x].set_angle0(
-                    x * 15,
-                    500,
-                    (y * 7.5) + 0
-                );
-                ground[y][x].set_angle1(
-                    (x * 15) - 7.5,
-                    500,
-                    (y * 7.5) + 7.5
-                );
-                ground[y][x].set_angle2(
-                    (x * 15) + 7.5,
-                    500,
-                    (y * 7.5) + 7.5
-                );
-            } else {
-                ground[y][x].set_angle0(
-                    (x * 15) + 7.5,
-                    500,
-                    (y * 7.5) + 0
-                );
-                ground[y][x].set_angle1(
-                    x * 15,
-                    500,
-                    (y * 7.5) + 7.5
-                );
-                ground[y][x].set_angle2(
-                    (x * 15) + 15,
-                    500,
-                    (y * 7.5) + 7.5
-                );
-            }
-        }
-    }
-
-    CoordTriple observer; // the point from which we see
-    observer.x = 300;
-    observer.y = 200;
-    observer.z = -(0x20 * 7.5);
+    // I will now create an instance of the Plane class from "plane.hpp".
+    Plane plane;
+    plane.set_space(space);
+    plane.set_height(15);
+    plane.set_y_val(500);
+    plane.init_triangles();
 
     // The next four values are displayed on the screen.
-    float xpos = observer.x;
-    float ypos = observer.y;
-    float zpos = observer.z;
+    float xpos = 300;
+    float ypos = 200;
+    float zpos = 0;
     float angle = 0;
 
     while (window_open) {
@@ -223,11 +180,7 @@ int main() {
 
         SDL_SetRenderDrawColor(renderer, GREEN, 255);
 
-        for (int y = 0; y < 0x20; ++y) {
-            for (int x = 0; x < 0x20; ++x) {
-                ground[y][x].draw_self(renderer, 600);
-            }
-        }
+        plane.draw_plane(renderer, 600);
 
         SDL_RenderPresent(renderer);
 
@@ -242,67 +195,35 @@ int main() {
                 switch (event.key.keysym.sym) {
                     case SDLK_a:
                         xpos--;
-                        for (int y = 0; y < 0x20; ++y) {
-                            for (int x = 0; x < 0x20; ++x) {
-                                ground[y][x].x_trans(1);
-                            }
-                        }
+                        plane.x_trans_plane(1);
                         break;
                     case SDLK_d:
                         xpos++;
-                        for (int y = 0; y < 0x20; ++y) {
-                            for (int x = 0; x < 0x20; ++x) {
-                                ground[y][x].x_trans(-1);
-                            }
-                        }
+                        plane.x_trans_plane(-1);
                         break;
                     case SDLK_w:
                         zpos++;
-                        for (int y = 0; y < 0x20; ++y) {
-                            for (int x = 0; x < 0x20; ++x) {
-                                ground[y][x].z_trans(-1);
-                            }
-                        }
+                        plane.z_trans_plane(-1);
                         break;
                     case SDLK_s:
                         zpos--;
-                        for (int y = 0; y < 0x20; ++y) {
-                            for (int x = 0; x < 0x20; ++x) {
-                                ground[y][x].z_trans(1);
-                            }
-                        }
+                        plane.z_trans_plane(1);
                         break;
                     case SDLK_UP:
                         ypos--;
-                        for (int y = 0; y < 0x20; ++y) {
-                            for (int x = 0; x < 0x20; ++x) {
-                                ground[y][x].y_trans(-1);
-                            }
-                        }
+                        plane.y_trans_plane(-1);
                         break;
                     case SDLK_DOWN:
                         ypos++;
-                        for (int y = 0; y < 0x20; ++y) {
-                            for (int x = 0; x < 0x20; ++x) {
-                                ground[y][x].y_trans(1);
-                            }
-                        }
+                        plane.y_trans_plane(1);
                         break;
                     case SDLK_q:
                         angle--;
-                        for (int y = 0; y < 0x20; ++y) {
-                            for (int x = 0; x < 0x20; ++x) {
-                                ground[y][x].y_rot_about(observer, -1);
-                            }
-                        }
+                        plane.rotate_plane(-1);
                         break;
                     case SDLK_e:
                         angle++;
-                        for (int y = 0; y < 0x20; ++y) {
-                            for (int x = 0; x < 0x20; ++x) {
-                                ground[y][x].y_rot_about(observer, 1);
-                            }
-                        }
+                        plane.rotate_plane(1);
                         break;
                 }
             break;
