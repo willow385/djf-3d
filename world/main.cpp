@@ -4,15 +4,14 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "plane.hpp"
-#include "djf-SDL-text.h"
+#include "../engine/djf-3d.hpp"
 
 #define GREEN 0, 255, 70
 #define BLACK 0, 0, 0
 
 // this handy function was copied almost verbatim from StackOverflow
 // https://stackoverflow.com/a/5794022/10942736
-std::string convert_to_str(float number){
+std::string convert_to_str(float number) {
     std::ostringstream buff;
     buff << number;
     return buff.str();
@@ -247,14 +246,14 @@ int main() {
                             plane2.z_trans_plane(1);
                             plane3.z_trans_plane(1);
                             break;
-                        case SDLK_UP:
+                        case SDLK_DOWN:
                             ypos--;
                             plane0.y_trans_plane(-1);
                             plane1.y_trans_plane(-1);
                             plane2.y_trans_plane(-1);
                             plane3.y_trans_plane(-1);
                             break;
-                        case SDLK_DOWN:
+                        case SDLK_UP:
                             ypos++;
                             plane0.y_trans_plane(1);
                             plane1.y_trans_plane(1);
