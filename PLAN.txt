@@ -16,7 +16,7 @@ being a typedef struct rather than a class.)
 
 2. Define a class for three-dimensional triangles. This should:
     0. Be made of points as described in step 1, and thereby inherit the
-       abilities of those points.
-    1. Be able to tell the space class to draw its edges.
-(Step 2 is not completed but would be so trivial to implement that it doesn't
-really matter. I just haven't gotten to doing it.)
+       abilities of those points. (completed)
+    1. Be able to tell the space class to draw its edges. (completed)
+(Step 2 is completed. I suppose the next thing to do is make more ambitious plans,
+perhaps stuff like opaque surfaces and raytracing. This is a fun educational project!)
