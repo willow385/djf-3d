@@ -1,5 +1,4 @@
-// literally just a bunch of "include"
-// directives for the preprocessor lol
+// literally just a bunch of "include" directives for the preprocessor lol
 
 #ifndef DJF_SDL_TEXT_H
 #define DJF_SDL_TEXT_H
