@@ -117,7 +117,7 @@ int main() {
             renderer,
             1,
             21,
-            "W/S - MOVE FORWARDS/BACK",
+            "W/S - move forwards/back",
             24,
             GREEN,
             255
@@ -126,7 +126,7 @@ int main() {
             renderer,
             1,
             31,
-            "A/D - MOVE LEFT/RIGHT",
+            "A/D - move left/right",
             21,
             GREEN,
             255
@@ -135,7 +135,7 @@ int main() {
             renderer,
             1,
             41,
-            "Q/E - TURN LEFT/RIGHT",
+            "Q/E - turn left/right",
             21,
             GREEN,
             255
@@ -144,7 +144,7 @@ int main() {
             renderer,
             1,
             51,
-            "UP/DOWN ARROW KEYS - MOVE UP/DOWN",
+            "up/down arrow keys - move up/down",
             33,
             GREEN,
             255
@@ -159,7 +159,7 @@ int main() {
             GREEN,
             255
         );
-        std::string xbuf = "X-POS " + convert_to_str(xpos);
+        std::string xbuf = "x-pos = " + convert_to_str(xpos);
         render_string(
             renderer,
             1,
@@ -169,7 +169,7 @@ int main() {
             GREEN,
             255
         );
-        std::string ybuf = "Y-POS " + convert_to_str(ypos);
+        std::string ybuf = "y-pos = " + convert_to_str(ypos);
         render_string(
             renderer,
             1,
@@ -179,7 +179,7 @@ int main() {
             GREEN,
             255
         );
-        std::string zbuf = "Z-POS " + convert_to_str(zpos);
+        std::string zbuf = "z-pos = " + convert_to_str(zpos);
         render_string(
             renderer,
             1,
@@ -189,7 +189,7 @@ int main() {
             GREEN,
             255
         );
-        std::string angbuf = "THETA " + convert_to_str(angle) + " DEGREES";
+        std::string angbuf = "theta = " + convert_to_str(angle) + " DEGREES";
         render_string(
             renderer,
             1,
