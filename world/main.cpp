@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "../engine/djf-3d.hpp"
+#include "../engine/djf-3d.cpp"
 
 #define GREEN 0, 255, 70
 #define BLACK 0, 0, 0

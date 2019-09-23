@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "../engine/djf-3d.hpp"
+#include "../engine/djf-3d.cpp"
 
 #define CYAN 0, 150, 255
 #define MAGENTA 255, 0, 5
