@@ -1,6 +1,8 @@
 /* Header file for displaying characters with SDL. Written
 in pure C. Supports ascii characters 32 to 126. */
 
+/* TODO: make this no longer be an embarassing mess */
+
 #ifndef SDL2_SDL_H
 #define SDL2_SDL_H
 #include <SDL2/SDL.h>
@@ -11,17 +13,20 @@ in pure C. Supports ascii characters 32 to 126. */
 #include <stdio.h>
 #endif
 
-/* This function renders a single character with a renderer.
-It returns 0 on success and nonzero on an error. */
-int render_char(SDL_Renderer *renderer, /* rendering context */
-                float x, /* position of the character */
-                float y,
-                const char character, /* the actual character to display
-                                  (I plan to support the full ascii set when this is done) */
-                int r, /* colour is in 8-bit RGB values */
-                int g,
-                int b,
-                int alpha) {
+/**
+ * Function to render a char in an SDL context
+ * @return error value
+ */
+int render_char(
+    SDL_Renderer *renderer, /* rendering context */
+    float x, /* position of the character */
+    float y,
+    const char character, /* the actual character to display */
+    int r, /* colour is in 8-bit RGB values */
+    int g,
+    int b,
+    int alpha
+) {
     int error_val;
     error_val += SDL_SetRenderDrawColor(renderer, r, g, b, alpha);
 
@@ -602,16 +607,17 @@ int render_char(SDL_Renderer *renderer, /* rendering context */
     return error_val;
 }
 
-int render_string(SDL_Renderer *renderer, /* rendering context */
-                float x, /* top-left corner of the string */
-                float y,
-                const char string[],
-                int string_length, /* easier to have the programmer
-                                    explicitly specify this for us */
-                int r, /* colour is in 8-bit RGB values */
-                int g,
-                int b,
-                int alpha) {
+int render_string(
+    SDL_Renderer *renderer, /* rendering context */
+    float x, /* top-left corner of the string */
+    float y,
+    const char string[],
+    int string_length, /* easier to have the programmer specify this for us */
+    int r, /* colour is in 8-bit RGB values */
+    int g,
+    int b,
+    int alpha
+) {
     int error_val;
     int i;
     for (i=0; i<string_length; i++) {

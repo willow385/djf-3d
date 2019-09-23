@@ -1,0 +1,9 @@
+TODOs:
+
+0. Write a Makefile for the engine
+
+1. Make a precompiled header file from the engine's sourcefiles
+
+2. Write clear documentation on how to use djf-3d
+
+3. Do similar things with the Rust version, threedox
