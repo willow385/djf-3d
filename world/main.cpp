@@ -107,7 +107,6 @@ int main() {
             renderer, /* rendering context */
             1, /* top-left corner of the string */
             11,
-            /* as of 29 May 2019 we do not yet support all ascii chars */
             "*** CONTROLS ***",
             16, /* length of the string */
             GREEN,
