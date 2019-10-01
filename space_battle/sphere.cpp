@@ -1,6 +1,6 @@
 #ifndef ENGINE
 #define ENGINE
-#include "../engine/djf-3d.hpp"
+#include "../engine/djf-3d.cpp"
 #endif
 
 #ifndef SDL2_SDL_H

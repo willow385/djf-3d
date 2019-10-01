@@ -3,9 +3,9 @@
 #include <math.h>
 #endif
 
-#ifndef _3D_TYPES_HPP
-#define _3D_TYPES_HPP
-#include "3d_types.hpp"
+#ifndef _3D_TYPES_CPP
+#define _3D_TYPES_CPP
+#include "3d_types.cpp"
 #endif
 
 /* Definition of axes:

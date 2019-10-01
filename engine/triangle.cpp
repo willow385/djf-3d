@@ -1,6 +1,6 @@
-#ifndef SPACE_HPP
-#define SPACE_HPP
-#include "space.hpp"
+#ifndef SPACE_CPP
+#define SPACE_CPP
+#include "space.cpp"
 #endif
 
 #ifndef SDL2_SDL_H
@@ -8,9 +8,9 @@
 #include <SDL2/SDL.h>
 #endif // SDL2_SDL_H
 
-// this is a class instead of a typedef struct because
-// having explicitly associated methods for the Triangle
-// makes Triangles a lot more useful to me
+/* this is a class instead of a typedef struct because
+   having explicitly associated methods for the Triangle
+   makes Triangles a lot more useful to me */
 class Triangle {
     private:
         CoordTriple angle0;
@@ -62,13 +62,12 @@ class Triangle {
         }
 
         /* It can be very useful to know where the exact geometric
-        center of the triangle is. Every triangle has such a center.
-        Therefore, the Triangle class comes with a method for finding
-        where its center is.
+           center of the triangle is. Every triangle has such a center.
+           Therefore, the Triangle class comes with a method for finding
+           where its center is.
 
-        This links to the page where I learned how to do this:
-        https://tinyurl.com/trig345
-        */
+           This links to the page where I learned how to do this:
+           https://tinyurl.com/trig345                                */
         CoordTriple geo_center() {
             float x_coord = (angle0.x + angle1.x + angle2.x) / 3;
             float y_coord = (angle0.y + angle1.y + angle2.y) / 3;
@@ -76,8 +75,8 @@ class Triangle {
             return s.point_at(x_coord, y_coord, z_coord);
         }
 
-        // The next three methods are for rotating the triangle around
-        // its own centroid (exact center).
+        /* The next three methods are for rotating the triangle around
+           its own centroid (exact center). */
         void x_rot_self(float degrees) {
             CoordTriple center = geo_center();
             angle0 = s.x_rotation(angle0, center, degrees);
@@ -99,8 +98,8 @@ class Triangle {
             angle2 = s.z_rotation(angle2, center, degrees);
         }
 
-        // The next three methods are for rotating the triangle about any
-        // other point.
+        /* The next three methods are for rotating the triangle about any
+           other point. */
         void x_rot_about(CoordTriple about, float degrees) {
             angle0 = s.x_rotation(angle0, about, degrees);
             angle1 = s.x_rotation(angle1, about, degrees);
@@ -119,9 +118,9 @@ class Triangle {
             angle2 = s.z_rotation(angle2, about, degrees);
         }
 
-        // finally, a method for drawing the triangle. These are dependent
-        // on the SDL2 API but this could easily be tweaked to work with any
-        // other graphics API.
+        /* finally, a method for drawing the triangle. These are dependent
+           on the SDL2 API but this could easily be tweaked to work with any
+           other graphics API. */
         int draw_self(SDL_Renderer *renderer, float bound) {
             int ret = 0; // error value
             ret += SDL_RenderDrawLine(

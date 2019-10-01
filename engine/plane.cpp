@@ -3,17 +3,18 @@
 #include <SDL2/SDL.h>
 #endif
 
-#ifndef TRIANGLE_HPP
-#define TRIANGLE_HPP
-#include "triangle.hpp"
-#endif // TRIANGLE_HPP
+#ifndef TRIANGLE_CPP
+#define TRIANGLE_CPP
+#include "triangle.cpp"
+#endif // TRIANGLE_CPP
 
-#include <stdexcept> // to ensure I don't go out of bounds, because C++ doesn't check array bounds
+#include <stdexcept> /* to ensure I don't go out of bounds, because
+			C++ doesn't check array bounds by default */
 
 class Plane {
 private:
     Space s;
-    Triangle ground[0x20][0x20]; // using hexadecimal numbers, just to be extra pretentious
+    Triangle ground[0x20][0x20]; // using hexadecimal numbers, just to flex
     float height; // height of each triangle
     float y_val; // y-coordinate of the plane
 
@@ -30,7 +31,9 @@ public:
 
     Triangle get_triangle_index(int index_a, int index_b) {
         if (index_a > 0x20 || index_b > 0x20) {
-            throw std::invalid_argument("Error - attempted to access illegal array index");
+            throw std::invalid_argument(
+                "Error - attempted to access illegal array index"
+            );
         }
 
         Triangle ret = ground[index_a][index_b];
@@ -46,8 +49,8 @@ public:
                 // Each of the triangles will be in the same space.
                 ground[y][x].set_space(s);
 
-                // The triangles will be offset so that they form an isometric
-                // grid.
+                /* The triangles will be offset so that they form an isometric
+                   grid. */
                 if (y % 2 == 0) {
                     ground[y][x].set_angle0(
                         x * height,
@@ -159,6 +162,6 @@ public:
     } // end of function body
 }; // end of  Plane class definition
 
-/* Moving the code for planes into a class wound up having more total lines of code, but fewer
-lines of code in main.cpp, which I count as a win since fewer lines tends to mean better readability.
-One thing's for sure: I find main.cpp to be a lot more readable this way. */
+/* Moving the code for planes into a class wound up having more total lines of code, but fewer lines of code in main.cpp, which I count as a win since fewer lines tends
+to mean better readability. One thing's for sure: I find main.cpp to be a lot more
+readable this way. */
