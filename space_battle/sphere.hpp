@@ -120,6 +120,7 @@ public:
         for (int i = 0; i < POINT_CT; ++i) {
             points[i].x += distance;
         }
+        centerpoint.x += distance;
         return 0;
     }
 
@@ -128,6 +129,7 @@ public:
         for (int i = 0; i < POINT_CT; ++i) {
             points[i].y += distance;
         }
+        centerpoint.y += distance;
         return 0;
     }
 
@@ -136,6 +138,7 @@ public:
         for (int i = 0; i < POINT_CT; ++i) {
             points[i].z += distance;
         }
+        centerpoint.z += distance;
         return 0;
     }
 
